@@ -1,0 +1,12 @@
+{
+  "name": "@online/tokenizer",
+  "version": "1.0.0",
+  "exports": "./mod.ts",
+  "imports": {
+    "@online/get-string-uid": "jsr:@online/get-string-uid@^1.0.0",
+    "@std/assert": "jsr:@std/assert@1"
+  },
+  "fmt": {
+    "lineWidth": 240
+  }
+}
