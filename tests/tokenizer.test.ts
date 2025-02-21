@@ -352,8 +352,8 @@ Deno.test("tokenizer should handle underscore number separators", () => {
   const input = "1_000_000";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_"
-    }
+      isNumberSeparator: (char) => char === "_",
+    },
   });
 
   assertEquals(tokens.length, 1);
@@ -365,8 +365,8 @@ Deno.test("tokenizer should handle mixed decimal and underscore separators", () 
   const input = "1_000.50 2_500_000.75";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_" || char === "."
-    }
+      isNumberSeparator: (char) => char === "_" || char === ".",
+    },
   });
 
   assertEquals(tokens.length, 3); // 2 numbers + 1 space
@@ -380,8 +380,8 @@ Deno.test("tokenizer should handle invalid number separators", () => {
   const input = "1..2 1__2 .5 _1";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_" || char === "."
-    }
+      isNumberSeparator: (char) => char === "_" || char === ".",
+    },
   });
 
   // Should split invalid numbers into separate tokens
@@ -395,8 +395,8 @@ Deno.test("tokenizer should handle numbers in expressions", () => {
   const input = "3.14 * 2_000 + 1.5";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_" || char === "."
-    }
+      isNumberSeparator: (char) => char === "_" || char === ".",
+    },
   });
 
   assertEquals(tokens.length, 9); // 3 numbers + 2 operators + 4 spaces
@@ -414,8 +414,8 @@ Deno.test("tokenizer should handle numbers at start and end of input", () => {
   const input = "1_234.56\n7_890.12";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_" || char === "."
-    }
+      isNumberSeparator: (char) => char === "_" || char === ".",
+    },
   });
 
   assertEquals(tokens.length, 3); // 2 numbers + 1 space (newline)
@@ -429,8 +429,8 @@ Deno.test("tokenizer should maintain correct line and position for numbers with 
   const input = "1_000.00\n2_000.00";
   const tokens = tokenizer(input, {
     validators: {
-      isNumberSeparator: (char) => char === "_" || char === "."
-    }
+      isNumberSeparator: (char) => char === "_" || char === ".",
+    },
   });
 
   assertEquals(tokens[0].type, TokenType.Number);

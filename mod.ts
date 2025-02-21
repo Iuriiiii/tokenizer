@@ -41,7 +41,7 @@ export enum TokenType {
   Separator,
   Space,
   Instruction,
-  EOF
+  EOF,
 }
 
 export interface IToken {
@@ -96,10 +96,10 @@ export interface ITokenizerValidators {
   isOperator: CharacterValidator;
   /**
    * Any numeric separator character.
-   * 
+   *
    * Some languages can use special symbols for numbers, for example the "." to
    * make a number a float number or "_" to make a number more readable.
-   * 
+   *
    * Some examples: 3.14, 1_000_000
    * @default .
    * @example ., _
@@ -142,7 +142,7 @@ export { getStringUid as getTokenId };
  * It supports customizable validators for character classification and can
  * optionally include an EOF token at the end of the token list.
  */
-export function tokenizer(text: string, options?: Partial<ITokenizerOptions>) {
+export function tokenizer(text: string, options?: Partial<ITokenizerOptions>): IToken[] {
   const tokens: IToken[] = [];
   const isSpace = options?.validators?.isSpace ?? _isSpace;
   const isSeparator = options?.validators?.isSeparator ?? _isSeparator;

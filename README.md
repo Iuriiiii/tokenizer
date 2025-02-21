@@ -1,6 +1,7 @@
 # @online/tokenizer
 
-A flexible and customizable tokenizer for parsing text into meaningful tokens. This module provides functionality to break down text input into various types of tokens such as strings, numbers, identifiers, operators, separators, spaces, and custom instructions.
+A flexible and customizable tokenizer for parsing text into meaningful tokens. This module provides functionality to break down text input into various types of tokens such as strings, numbers, identifiers, operators, separators, spaces,
+and custom instructions.
 
 ## Features
 
@@ -42,18 +43,18 @@ console.log(tokens);
 You can customize how the tokenizer identifies different types of characters:
 
 ```typescript
-import { tokenizer, ITokenizerValidators } from "@online/tokenizer";
+import { ITokenizerValidators, tokenizer } from "@online/tokenizer";
 
 const customValidators: Partial<ITokenizerValidators> = {
-  isString: (char) => ["'", '"', '`'].includes(char),
+  isString: (char) => ["'", '"', "`"].includes(char),
   isOperator: (char) => "+-*/".includes(char),
-  isInstruction: (token) => token.startsWith("@")
+  isInstruction: (token) => token.startsWith("@"),
 };
 
 const text = 'let x = @print("Hello")';
-const tokens = tokenizer(text, { 
+const tokens = tokenizer(text, {
   validators: customValidators,
-  insertEof: true 
+  insertEof: true,
 });
 
 /*
@@ -100,11 +101,11 @@ Each token contains the following information:
 
 ```typescript
 interface IToken {
-  uid: number;        // Unique identifier
-  type: TokenType;    // Type of the token
-  text: string;       // Actual text content
-  line: number;       // Line number (1-based)
-  pos: number;        // Position in line (1-based)
+  uid: number; // Unique identifier
+  type: TokenType; // Type of the token
+  text: string; // Actual text content
+  line: number; // Line number (1-based)
+  pos: number; // Position in line (1-based)
 }
 ```
 
@@ -121,8 +122,8 @@ The tokenizer accepts an options object with the following properties:
 
 ```typescript
 interface ITokenizerOptions {
-  validators: Partial<ITokenizerValidators>;  // Custom validators
-  insertEof: boolean;                         // Whether to append EOF token
+  validators: Partial<ITokenizerValidators>; // Custom validators
+  insertEof: boolean; // Whether to append EOF token
 }
 ```
 
